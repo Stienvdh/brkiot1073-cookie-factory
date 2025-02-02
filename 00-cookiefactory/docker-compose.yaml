@@ -1,0 +1,36 @@
+services:
+  packing1:
+    build: ./packing1
+    ports:
+      - "8001:8000"
+  packing2:
+    build: ./packing2
+    ports:
+      - "8002:8000"
+    depends_on:
+      - packing1
+  plc:
+    build: ./plc
+    ports:
+      - "8003:8000"
+    depends_on:
+      - oven
+      - temperature
+  temperature:
+    build: ./temperature
+    ports:
+      - "8004:8000"
+  oven:
+    build: ./oven
+    ports:
+      - "8005:8000"
+  scada:
+    build: ./scada
+    ports:
+      - "8006:8000"
+    depends_on:
+      - packing1
+      - packing2
+      - plc
+      - temperature
+      - oven

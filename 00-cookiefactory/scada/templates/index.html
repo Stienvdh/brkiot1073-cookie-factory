@@ -1,0 +1,96 @@
+<!doctype html>
+<meta http-equiv="refresh" content="3"> 
+<html>
+  <head>
+    <title>COOKIE {{ component_name }}</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      
+      /* Create three unequal columns that floats next to each other */
+      .column {
+        float: left;
+      }
+      
+      .left, .right {
+        width: 35%;
+        padding: 40px;
+      }
+      
+      .middle {
+        width: 30%;
+      }
+      
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <p style="font-size: 50px;font-family: Helvetica;text-align: center;margin-bottom:10px;margin-top:10px">Welcome to the cookie factory!</p>
+
+    <div class="row">
+      <!-- OVEN -->
+      <div class="column left" style="padding-left: 80px;">
+        <p style="font-size: 30px;font-family: Helvetica;">Oven</p>
+        <p style="font-size: 20px;font-family: Helvetica;">The oven is {{ oven_state }}</p>
+        <p style="font-size: 20px;font-family: Helvetica;">Temp: {{ temperature }}</p>
+        <p style="font-size: 20px;font-family: Helvetica;">Baked {{ cookies }} cookies</p>
+        {% if oven_state == "ON" %}
+        <img src="{{ url_for('static', filename='images/ovenon.png') }}" class="image" />
+        {% else %}
+        <img src="{{ url_for('static', filename='images/ovenoff.png') }}" class="image" />
+        {% endif %}
+      </div>
+
+      <!-- SPACE -->
+      <div class="column middle">
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <p style="font-size: 30px;font-family: Helvetica;">Router</p>
+        <p style="font-size: 20px;font-family: Helvetica;">The network is OK</p>
+        {% if packing1 == "ON" %}
+        <p style="font-size: 20px;font-family: Helvetica;">Packing machine 1 is CONNECTED</p>
+        <p style="font-size: 20px;font-family: Helvetica;">Packing machine 2 is DISCONNECTED</p>
+        {% else %}
+        <p style="font-size: 20px;font-family: Helvetica;">Packing machine 1 is DISCONNECTED</p>
+        <p style="font-size: 20px;font-family: Helvetica;">Packing machine 2 is CONNECTED</p>
+        {% endif %}
+        <img src="{{ url_for('static', filename='images/routeron.png') }}" class="image" />
+      </div>
+
+      <!-- PACKING MACHINE 2 -->
+      <div class="column right">
+        <div class="row">
+          {% if packing1 == "ON" %}
+          <p style="font-size: 30px;font-family: Helvetica;">Packing machine 1 (carton) is ON</p>
+          <p style="font-size: 20px;font-family: Helvetica;">Packaged {{ cookiesp1 }} cookies</p>
+          <img src="{{ url_for('static', filename='images/pack1on.png') }}" class="image" />
+          {% else %}
+          <p style="font-size: 30px;font-family: Helvetica;">Packing machine 1 (carton) is OFF</p>
+          <p style="font-size: 20px;font-family: Helvetica;">Packaged {{ cookiesp1 }} cookies</p>
+          <img src="{{ url_for('static', filename='images/pack1off.png') }}" class="image" />
+          {% endif %}
+        </div>
+        <div class="row">
+          
+        </div>
+        <div class="row">
+          {% if packing1 == "ON" %}
+          <p style="font-size: 30px;font-family: Helvetica;">Packing machine 2 (plastic) is OFF</p>
+          <p style="font-size: 20px;font-family: Helvetica;">Packaged {{ cookiesp2 }} cookies</p>
+          <img src="{{ url_for('static', filename='images/pack2off.png') }}" class="image" />
+          {% else %}
+          <p style="font-size: 30px;font-family: Helvetica;">Packing machine 2 (plastic) is ON</p>
+          <p style="font-size: 20px;font-family: Helvetica;">Packaged {{ cookiesp2 }} cookies</p>
+          <img src="{{ url_for('static', filename='images/pack2on.png') }}" class="image" />
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
